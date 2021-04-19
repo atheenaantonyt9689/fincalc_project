@@ -2,8 +2,8 @@
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import  HomeLoan
-from .emi import HomeLoanEmi
+from .forms import  HomeLoanForm
+from .EmiCalculator import HomeLoanEmi
 from django.views import View
 
 
