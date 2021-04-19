@@ -1,4 +1,4 @@
-"""from django.db import models
+from django.db import models
 
 # Create your models here.
 class HomeLoan(models.Model):
@@ -9,6 +9,6 @@ class HomeLoan(models.Model):
 
     def __str__(self):
         return self.amount
-    """
+    
     
 

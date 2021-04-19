@@ -3,7 +3,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import  HomeLoan
-from .emi import HomeLoan
+from .emi import HomeLoanEmi
 from django.views import View
 
 
@@ -18,17 +18,24 @@ class HomeLoanView(View):
 
     def post(self,request,*args,**kwargs):
         form = self.form_class(request.POST)
-        amount=request.POST.get("amount")
-        rate=request.POST.get("rate")
-        month=request.POST.get("month")
-        emi_cal=HomeLoan()
-        output=emi_cal.rate_fun(amount,rate,month)
-        print("output",output)
+        #amount=request.POST.get("amount")
+        #rate=request.POST.get("rate")
+        #month=request.POST.get("month")
+        
         #category=calc.bmi_description(bmi)
         if form.is_valid():
-            return HttpResponseRedirect('/success/')
- 
-        return render(request,self.template_name,{'form':form})
+
+            amount=form.cleaned_data["amount"]
+            rate=form.cleaned_data["rate"]
+            month=form.cleaned_data["month"]
+            emi_cal=HomeLoan()
+
+            output=emi_cal.rate_fun(amount,rate,month)
+            #print("output",output)
+            
+            return render(request,self.template_name,{'form':form})
+        else:
+            return render(request,self.template_name,{'form':form})
 
 
 

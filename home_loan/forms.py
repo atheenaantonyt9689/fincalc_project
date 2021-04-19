@@ -19,7 +19,7 @@ from django import forms
 
 class HomeLoan(forms.Form):
     amount=forms.CharField(label='amount', max_length=100)
-    interest_rate=forms.CharField(label='rate', max_length=10)
-    tenure=forms.CharField(label='month', max_length=10)
+    rate=forms.CharField(label='rate', max_length=10)
+    month=forms.CharField(label='month', max_length=10)
 
     
