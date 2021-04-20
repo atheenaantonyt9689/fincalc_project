@@ -1,17 +1,3 @@
-#from django .forms import ModelForm
-""""from django import forms 
-
-from .models import HomeLoan
-#class HomeLoanForm(forms.Form):
-    #amount=forms.CharField()
-    #interest_rate=forms.CharField()
-    #tenure=forms.CharField()
-
-class HomeLoanForm(forms.ModelForm):
-    class Meta:
-        model=HomeLoan
-        fields=['amount', 'interest_rate', 'tenure']
-#template_name='layouts/base.html'"""
 
 
 

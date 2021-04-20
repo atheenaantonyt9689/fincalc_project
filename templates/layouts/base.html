@@ -28,18 +28,21 @@
     </form>
 
     <div >
+
+      <br>
+      
       <div class="card text-center">
-        <div class="card-header">
-          <ul class="nav nav-pills card-header-pills">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">{{}</a>
-            </li>
-            
-          </ul>
+        {%if emi %}
+        <div class="card-header"><h2>loan calculator</h2>
+          
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{}}</h5>
-          <p class="card-text">{{}}</p>
+          <h5 class="card-title">Total amount:{{total_amount}}</h5>
+          <h5 class="card-title">Emi:{{emi}}</h5>
+          
+          
+          <p class="card-text">interest:{{interest}}</p>
+          {% endif %}
           
         </div>
       </div>

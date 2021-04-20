@@ -3,12 +3,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import  HomeLoanForm
-from .EmiCalculator import HomeLoanEmi
+from .emi import EmiCalculator
 from django.views import View
+from .models import HomeLoan
 
 
 class HomeLoanView(View):
-    form_class=HomeLoan
+    form_class=HomeLoanForm
     initial={'key':'value'}
     template_name='layouts/base.html'
 
@@ -18,24 +19,32 @@ class HomeLoanView(View):
 
     def post(self,request,*args,**kwargs):
         form = self.form_class(request.POST)
-        #amount=request.POST.get("amount")
-        #rate=request.POST.get("rate")
-        #month=request.POST.get("month")
-        
-        #category=calc.bmi_description(bmi)
+                
         if form.is_valid():
 
             amount=form.cleaned_data["amount"]
             rate=form.cleaned_data["rate"]
             month=form.cleaned_data["month"]
-            emi_cal=HomeLoan()
-
-            output=emi_cal.rate_fun(amount,rate,month)
-            #print("output",output)
+            #total_amount_payable=form.cleaned_data["total_amount_payable"]
+            calc=EmiCalculator(amount,rate,month)           
             
-            return render(request,self.template_name,{'form':form})
-        else:
-            return render(request,self.template_name,{'form':form})
+            context={'emi':calc.emi(),
+            'total_amount':calc.total_amount(),
+            'interest':calc.interest()
+
+
+            }
+
+            loan=HomeLoan.objects.create(amount=amount,rate=rate,month=month)
+
+            loan.save()
+
+        return render (request,self.template_name ,context)
+
+            
+            #return render(request,self.template_name,context)
+        #else:
+            #return render(request,self.template_name,{'form':form})
 
 
 
